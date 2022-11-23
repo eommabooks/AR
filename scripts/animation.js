@@ -1,3 +1,13 @@
+// animation-jump // 점프 애니메이션 //
+// animation-scale // 축소 확장 //
+// animation-scale-stop // 축소 확장 멈춤 //
+// animation-scale-large // 축소 확장 크게 //
+// animation-scale-updown // 늘였다 줄였다 (위아래로) //
+// animation-scale-side // 늘였다 줄였다 (양옆으로) //
+// animation-rotation-fast // 빙글빙글 (빠르게) //
+// animation-rotation-slow // 빙글빙글 (느리게) //
+// animation-rotation-z // 오뚜기 //
+// animation-opacity // 사라졌다 나타났다 //
 let defaultScale = [8, 8, 8];
 
 // toScale x와 y 사이즈를 1씩 늘림
@@ -43,6 +53,80 @@ AFRAME.registerComponent("animation-scale", {
       easing: "easeInOutQuad",
     });
   },
+});
+
+// 확장하고 멈춤 //
+// animation-scale-stop //
+AFRAME.registerComponent("animation-scale-stop", {
+  init: function () {
+    this.entity = this.el;
+    this.fromScale = defaultScale.join(" ");
+    this.running = false;
+
+    this.entity.setAttribute("animation__scale", {
+      property: "scale",
+      from: toScale(-2, -2, 0),
+      to: toScale(2, 2, 0),
+      dur: "3000",
+      easing: "easeInOutQuint",
+      animationbegin: "4000",
+      delay: "4000",
+      loop: "true",
+      //startEvents: "start",
+      //pauseEvents: "pause",
+    });
+  },
+
+  // trigger 마커가 보일때마다 다시 시작
+  /* tick: function () {
+    if (this.running == false && this.markerEl.object3D.visible == true) {
+      //this.entity.emit("start");
+      this.running = true;
+    } else if (
+      this.running == true &&
+      this.markerEl.object3D.visible == false
+    ) {
+      //this.entity.emit("pause");
+      this.running = false;
+    }
+  }, */
+});
+
+// 축소하고 멈춤 //
+// animation-scale-stop-reverse //
+AFRAME.registerComponent("animation-scale-stop-reverse", {
+  init: function () {
+    this.entity = this.el;
+    this.fromScale = defaultScale.join(" ");
+    this.running = false;
+
+    this.entity.setAttribute("animation__scale", {
+      property: "scale",
+      from: toScale(0, 0, 0),
+      to: toScale(-8, -8, 0),
+      dur: "10000",
+      easing: "linear",
+      animationbegin: "4000",
+      delay: "4000",
+      loop: "true",
+      //startEvents: "start",
+      //pauseEvents: "pause",
+    });
+  },
+
+  // trigger 마커가 보일때마다 다시 시작
+  /* tick: function () {
+    if (this.running == false && this.markerEl.object3D.visible == true) {
+      //this.entity.emit("start");
+      this.running = true;
+    } else if (
+      this.running == true &&
+      this.markerEl.object3D.visible == false
+    ) {
+      //this.entity.emit("pause");
+      this.running = false;
+    }
+  }, */
 });
 
 // 크게 확장-축소 반복, 커지고 작아지고 (큰버전) //
