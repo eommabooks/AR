@@ -45,6 +45,46 @@ AFRAME.registerComponent("animation-scale", {
   },
 });
 
+// 확장하고 멈춤 //
+// animation-scale-stop //
+AFRAME.registerComponent("animation-scale-stop", {
+  init: function () {
+    this.entity = this.el;
+    this.fromScale = defaultScale.join(" ");
+    this.running = false;
+
+    this.entity.setAttribute("animation__scale", {
+      property: "scale",
+      from: toScale(-2, -2, 0),
+      to: toScale(2, 2, 0),
+      dur: "3000",
+      easing: "easeInOutQuint",
+      loop: "true",
+    });
+  },
+});
+
+// 축소하고 멈춤 //
+// animation-scale-stop-reverse //
+AFRAME.registerComponent("animation-scale-stop-reverse", {
+  init: function () {
+    this.entity = this.el;
+    this.fromScale = defaultScale.join(" ");
+    this.running = false;
+
+    this.entity.setAttribute("animation__scale", {
+      property: "scale",
+      from: toScale(0, 0, 0),
+      to: toScale(-5, -5, 0),
+      dur: "10000",
+      easing: "linear",
+      loop: "true",
+      //startEvents: "start",
+      //pauseEvents: "pause",
+    });
+  },
+});
+
 // 크게 확장-축소 반복, 커지고 작아지고 (큰버전) //
 // animation-scale-large //
 AFRAME.registerComponent("animation-scale-large", {
